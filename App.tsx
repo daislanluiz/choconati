@@ -10,23 +10,43 @@ import { Ingredient, Recipe } from './types';
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   
-  // Persist state in localStorage for basic data retention
+  // Persist state in localStorage with error handling
   const [ingredients, setIngredients] = useState<Ingredient[]>(() => {
-    const saved = localStorage.getItem('choconati_ingredients');
-    return saved ? JSON.parse(saved) : INITIAL_INGREDIENTS;
+    try {
+      const saved = localStorage.getItem('choconati_ingredients');
+      const parsed = saved ? JSON.parse(saved) : null;
+      return Array.isArray(parsed) ? parsed : INITIAL_INGREDIENTS;
+    } catch (error) {
+      console.error("Erro ao carregar ingredientes:", error);
+      return INITIAL_INGREDIENTS;
+    }
   });
 
   const [recipes, setRecipes] = useState<Recipe[]>(() => {
-    const saved = localStorage.getItem('choconati_recipes');
-    return saved ? JSON.parse(saved) : INITIAL_RECIPES;
+    try {
+      const saved = localStorage.getItem('choconati_recipes');
+      const parsed = saved ? JSON.parse(saved) : null;
+      return Array.isArray(parsed) ? parsed : INITIAL_RECIPES;
+    } catch (error) {
+      console.error("Erro ao carregar receitas:", error);
+      return INITIAL_RECIPES;
+    }
   });
 
   useEffect(() => {
-    localStorage.setItem('choconati_ingredients', JSON.stringify(ingredients));
+    try {
+      localStorage.setItem('choconati_ingredients', JSON.stringify(ingredients));
+    } catch (e) {
+      console.error("Erro ao salvar ingredientes", e);
+    }
   }, [ingredients]);
 
   useEffect(() => {
-    localStorage.setItem('choconati_recipes', JSON.stringify(recipes));
+    try {
+      localStorage.setItem('choconati_recipes', JSON.stringify(recipes));
+    } catch (e) {
+      console.error("Erro ao salvar receitas", e);
+    }
   }, [recipes]);
 
   const renderContent = () => {
