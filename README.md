@@ -1,20 +1,29 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ChocoNati Gestão
 
-# Run and deploy your AI Studio app
+Um sistema completo de controle de estoque e financeiro para confeitarias.
 
-This contains everything you need to run your app locally.
+## Versão Web (React)
+Este projeto foi incialmente criado em React. Para rodar a versão web:
+`npm start`
 
-View your app in AI Studio: https://ai.studio/apps/drive/1cKGzRIlaSrktGhFjYdmR7BdQMK3EHv4-
+## Versão Python (Streamlit)
+Uma versão completa em Python foi adicionada para execução local ou em servidores Python.
 
-## Run Locally
+### Como rodar a versão Python:
 
-**Prerequisites:**  Node.js
+1. Instale as dependências:
+```bash
+pip install -r requirements.txt
+```
 
+2. Configure sua chave da API do Google Gemini (necessário para o Consultor IA):
+   - Crie um arquivo `.env` ou exporte a variável no terminal:
+   - Linux/Mac: `export API_KEY="sua_chave_aqui"`
+   - Windows: `set API_KEY="sua_chave_aqui"`
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+3. Execute o aplicativo:
+```bash
+streamlit run streamlit_app.py
+```
+
+O aplicativo abrirá no seu navegador padrão (geralmente http://localhost:8501).
